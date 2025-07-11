@@ -17,16 +17,14 @@ Understand what's happening under the hood (PORTB, DDRB, etc.)
 Use costycnc.it/avr1 to compile and upload assembly without any local software
 
 🚦 Step 1 — Arduino Style (digitalWrite)
-cpp
-Copia
-Modifica
-void setup() {
-  pinMode(13, OUTPUT);
-}
 
-void loop() {
-  digitalWrite(13, HIGH); // LED ON
-}
+            void setup() {
+              pinMode(13, OUTPUT);
+            }
+            
+            void loop() {
+              digitalWrite(13, HIGH); // LED ON
+            }
 Then:
 
 cpp
