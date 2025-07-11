@@ -18,7 +18,7 @@ This tutorial demonstrates:
 
 ## 🚦 Step 1 — Arduino Style (`digitalWrite`)
 
-```cpp
+```
 void setup() {
   pinMode(13, OUTPUT);
 }
@@ -26,18 +26,16 @@ void setup() {
 void loop() {
   digitalWrite(13, HIGH); // LED ON
 }
+```
 Then:
 
-cpp
-Copia
-Modifica
+```
 void loop() {
   digitalWrite(13, LOW); // LED OFF
 }
+```
 ⚙️ Step 2 — Register Access in C
-cpp
-Copia
-Modifica
+```
 void setup() {
   _SFR_MEM8(0x24) = 0b00100000; // DDRB = 0x24 → set PB5 as output
 }
@@ -45,14 +43,13 @@ void setup() {
 void loop() {
   _SFR_MEM8(0x25) = 0b00100000; // PORTB = 0x25 → PB5 high (LED ON)
 }
+```
 Then:
-
-cpp
-Copia
-Modifica
+```
 void loop() {
   _SFR_MEM8(0x25) = 0b00000000; // PB5 low → LED OFF
 }
+```
 📌 Explanation:
 Arduino is like a closet full of registers. Address 0x25 controls PORTB, where bit 5 (PB5) is linked to the onboard LED. Writing 1 turns it on, 0 turns it off.
 
@@ -60,9 +57,8 @@ Arduino is like a closet full of registers. Address 0x25 controls PORTB, where b
 Open 👉 https://costycnc.it/avr1
 
 🔋 LED ON
-asm
-Copia
-Modifica
+
+```
 .org 0
   rjmp init
 .org 0x68
@@ -71,10 +67,9 @@ init:
   sts 0x24, r16       ; DDRB
   sts 0x25, r16       ; PORTB
   rjmp init
+```
 💡 LED OFF
-asm
-Copia
-Modifica
+```
 .org 0
   rjmp init
 .org 0x68
@@ -84,6 +79,7 @@ init:
   ldi r16, 0
   sts 0x25, r16
   rjmp init
+```
 ☑️ Compile and upload directly from the browser.
 ⚠️ Disconnect Arduino from serial monitor if the upload fails.
 
